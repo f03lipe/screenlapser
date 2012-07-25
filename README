@@ -1,0 +1,10 @@
+
+This script lets you record screenlapses by taking screenshots from time to
+time and compiling them into an .avi video, with background music.
+
+The package requirements are:
+-- scrot
+-- mencoder
+
+
+This is an excuse to learn the Bash (Bourn Again SHell) language. :)

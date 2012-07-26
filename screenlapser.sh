@@ -5,18 +5,19 @@
 # http://www.bhalash.com/archives/885403473
 # I did the rest.
 
-
-source functions.sh
-
 NAME="screenlapser"
 VERSION="1.0"
 AUTHOR="@f03lipe"
 USAGE="Usage: screenlapser.sh [ record | count | compile | restart ] dir (? music-file)"
-# SLEEP=
+
+E_BADARGS=85
+E_NOTFOUND=86
+
+source functions.sh
 
 [[ "$#" == 2 || "$#" == 3 ]] || {
 	echo "invalid number of arguments entered. aborting."
-	usage_and_exit
+	usage_and_exit $E_BADARGS
 }
 
 # second arg must be a valid dir

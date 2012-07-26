@@ -45,19 +45,25 @@ function record ()
 		echo "$frames frames were found. updating the count"
 	fi
 
+	SIGINT=2
+	SIGQUIT=3
+
+	# trap ^C signal to end loop
+	trap "break;" 2 3
+
 	while true
 	do
 		now=$(date +"%s")
 		diff=$(($now-$started))
 		frames=$(($frames+1))
 
-		scrot -q 100 $(date +%Y%m%d%H%M%S).jpg
+		scrot -q 100 $(date +%Y%m%d%H%M%S).jpg 
 		echo "$frames frames saved. $(($diff / 60))min$(($diff % 60))s elapsed."
 
 		sleep $SLEEP
 	done
 
-	# TODO: add key capture condition to exit loop  
+	echo -e "\nrecording stoped at `date +%T` with $frames frames."
 
 	return 0
 }

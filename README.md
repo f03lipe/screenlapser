@@ -5,21 +5,19 @@ with background music file specified by user.
 
 It's yet just another excuse to learn Bash (Bourn Again SHell). :)
 
------
+Requirements
+------------
 
-### Requirements
 * [scrot](http://freecode.com/projects/scrot) - `apt-get install scrot`
 * [mencoder](http://www.mplayerhq.hu/design7/news.html) - `apt-get install mencoder`
 
+Usage
 -----
 
-### Usage:
-	
 	$ ./screenlapser.sh working_dir [ record | count | compile | restart ] [-m bgmusic]?
 
+TODOs
 -----
-
-### Next TODOs:
 
 * Allow custom framerates in video (adjust to film duration).
 * Allow for background music to be optional.

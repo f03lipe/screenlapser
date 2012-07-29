@@ -8,36 +8,33 @@
 NAME="screenlapser"
 VERSION="1.0"
 AUTHOR="@f03lipe"
-USAGE="Usage: screenlapser.sh [ record | count | compile | restart ] dir (? music-file)"
+USAGE="Usage: screenlapser.sh working_dir [ record | stats | compile | restart ] [-m music-file]?"
 
 E_BADARGS=85
 E_NOTFOUND=86
 
 source functions.sh
 
-[[ "$#" == 2 || "$#" == 3 ]] || {
-	echo "invalid number of arguments entered. aborting."
-	usage_and_exit $E_BADARGS
-}
-
 # second arg must be a valid dir
-[ -d $2 ] || die "entered directory doesn't exist. aborting."
+[ -d $1 ] || die "$1 isn't a valid directory. aborting."
 
-cd $2
+cd $1
 
-case $1 in
-	
+case $2 in
 	"record")
-			record
-			;;
+			record;;
 	
 	"stats")
-			stats
-			;;
+			stats;;
 	
 	"compile")
 			[ -n "$3" ] || die "'compile' option with no bg music file defined."
-			MUSIC_BG="$3"
+			shift 2
+
+			while getopts "m:" a
+			do 
+				MUSIC_BG="$OPTARG"
+			done
 			compile
 			;;
 	

@@ -72,7 +72,7 @@ function compile ()
 {
 	# compiles the screenshots into a screenlapse.avi video
 
-	[ -f "$MUSIC_BG" ] || die "file $MUSIC_BG doesn't exist. aborting."
+	[ -f "$MUSIC_BG" ] || die "music file $MUSIC_BG doesn't exist. aborting."
 	[ $(ls *.jpg 2> /dev/null | wc -l) != 0 ] || die "there are no frames to compile. aborting."
 
 	# make file list

@@ -112,37 +112,31 @@ function compile ()
 {
 	# Compiles the screenshots using mencoder
 
-	[ -f "$SOUNDTRACK" ] || die "music file $SOUNDTRACK doesn't exist. aborting."
-	
 	if [[ $(cat $LOGFILE 2>&- | grep .jpg | wc -l) == '0' ]]
 	then
 		die "No frames to compile. Aborting."
 	fi
 	
+	if [[ $QUIET ]]
+	then
+		stream=/dev/null
+	else
+		stream=/dev/stdout
+	fi
+
 	if [[ -z $SOUNDTRACK ]]
 	then
 		inform "No soundtrack file was specified. Continuing..."
-		if [[ $QUIET ]]
-		then
-			mencoder -ovc x264 -mf w=1400:h=900:fps=20:type=jpg 'mf://@'$LOGFILE -o $FINALFILE *>&-
-		else
-			mencoder -ovc x264 -mf w=1400:h=900:fps=20:type=jpg 'mf://@'$LOGFILE -o $FINALFILE
-		fi
+		mencoder -ovc x264 -mf w=1400:h=900:fps=20:type=jpg 'mf://@'$LOGFILE -o $FINALFILE >&$stream
 	else
 		if [[ ! -f $SOUNDTRACK ]]
 		then
 			die "File '$SOUNDTRACK' doesn't exist. Aborting."
 		else
-			if [[ $QUIET ]]
-			then
-				mencoder -ovc x264 -oac mp3lame -audiofile "$SOUNDTRACK" \
-						 -mf w=1400:h=900:fps=20:type=jpg 'mf://@'$LOGFILE -o $FINALFILE 2>&- 1>&-
-			else
-				mencoder -ovc x264 -oac mp3lame -audiofile "$SOUNDTRACK" \
-						 -mf w=1400:h=900:fps=20:type=jpg 'mf://@'$LOGFILE -o $FINALFILE
-			fi
+			mencoder -ovc x264 -oac mp3lame -audiofile "$SOUNDTRACK" \
+					 -mf w=1400:h=900:fps=20:type=jpg 'mf://@'$LOGFILE -o $FINALFILE >&$stream
 		fi
 	fi
-	
-	totem $FINALFILE
+
+	totem $FINALFILE >&$stream &
 }

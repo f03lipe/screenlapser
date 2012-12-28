@@ -3,7 +3,7 @@ This bash script lets you record screenlapses and save them with a background mu
 It takes screenshots using scrot and then uses mencoder to compile it to an AVI film
 with background music file specified by user.
 
-It's yet just another excuse to learn Bash (Bourn Again SHell). :)
+It's yet just another excuse to learn Bash. :)
 
 Requirements
 ------------
@@ -14,12 +14,22 @@ Requirements
 Usage
 -----
 
-	$ ./screenlapser.sh working_dir [ record | count | compile | restart ] [-m bgmusic]?
+	Usage: $ ./screenlapser.sh [-d dir] [-m soundtrack] [-q] [ action ]
+	Create and compile screenlapses using scrot and mencoder.
+	where:
+		action is among:
+			record      Starts taking pictures.
+			compile     Uses mencoder to create the video.
+			reset       Removes the saved screenshots from the directory specified.
+			stats       Shows stats on the number of screenshoots taken.
+		-d  Specifies the directory to save the screenshots.
+		-m  Specifies the background music for the footage.
+			Only used when the action is set to 'compile'.
+		-q  Quiet mode.
+	Attention: please, follow the order specified above.
 
 TODOs
 -----
-
-* Allow custom framerates in video (adjust to film duration).
-* Allow for background music to be optional.
 * Allow other formats, other than AVI.
-* Create a directory by default, so the user doesn't have to.
+* Custom fps. (based on soundtrack length?)
+* Let user set the final filename.

@@ -24,7 +24,7 @@ Attention: please, follow the order specified above."
 
 unset QUIET # Just to make sure.
 LOGFILE=".screens"
-FINALFILE="screenlapse.avi"
+FINALFILE="$SOURCE_DIR/screenlapse.avi"
 SOURCE_DIR=`dirname $0`
 
 source $SOURCE_DIR/functions.sh

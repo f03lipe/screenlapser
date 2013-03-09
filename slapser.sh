@@ -53,7 +53,7 @@ do
 			WORKING_DIR="$OPTARG"
 			;;
 		m)
-			SOUNDTRACK="$OPTARG"
+			SOUNDTRACK=$(readlink -e $OPTARG)
 			;;
 		q)
 			QUIET=1

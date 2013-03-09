@@ -24,7 +24,6 @@ Attention: please, follow the order specified above."
 
 unset QUIET # Just to make sure.
 LOGFILE=".screens"
-FINALFILE="$SOURCE_DIR/screenlapse.avi"
 SOURCE_DIR=`dirname $0`
 
 source $SOURCE_DIR/functions.sh
@@ -81,10 +80,11 @@ then
 	die "$WORKING_DIR: not a valid directory." $E_NOTFOUND
 fi
 
+FINALFILE=$PWD/$(basename $WORKING_DIR).avi
+
 cd $WORKING_DIR
 inform "Working inside '$WORKING_DIR'"
 #
-
 
 if [[ ! -f $LOGFILE ]]
 then
